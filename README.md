@@ -16,7 +16,7 @@ It should work with other versions, but we haven't tested it.
 2. Add this line in `dependencies`.
 ```
 "dependencies": {
-    "studio.shirokurohitsuji.unity-utilities": "https://github.com/shirokurohitsuji/UnityUtilities.git"
+    "com.paochanz.unity-utilities": "https://github.com/paochanz/UnityUtilities.git"
 }
 ```
 3. UPM should install the package.
@@ -57,7 +57,7 @@ Color color = new ColorHtml("#FFFFFF");
 
 ## Author
 
-[SHIROKUROHTISUJI](https://shirokurohitsuji.studio/)
+[PAOCHANZ](https://paochanz.com/)
 
 ## License
 

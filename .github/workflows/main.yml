@@ -26,7 +26,7 @@ jobs:
       - name: checkout-self
         uses: actions/checkout@v4
         with:
-          repository: shirokurohitsuji/UnityUtilities
+          repository: paochanz/UnityUtilities
           fetch-depth: 0
       - name: prune-previous-images
         run: docker image prune --all --force
@@ -49,7 +49,7 @@ jobs:
       - name: checkout-self
         uses: actions/checkout@v4
         with:
-          repository: shirokurohitsuji/UnityUtilities
+          repository: paochanz/UnityUtilities
           fetch-depth: 0
 
   prerelease:
@@ -67,7 +67,7 @@ jobs:
       - name: checkout-self
         uses: actions/checkout@v4
         with:
-          repository: shirokurohitsuji/UnityUtilities
+          repository: paochanz/UnityUtilities
           fetch-depth: 0
       - name: release-on-github
         uses: ./.github/actions/create-release
@@ -76,5 +76,5 @@ jobs:
       - name: checkout-self
         uses: actions/checkout@v4
         with:
-          repository: shirokurohitsuji/UnityUtilities
+          repository: paochanz/UnityUtilities
           fetch-depth: 0

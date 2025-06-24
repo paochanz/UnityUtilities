@@ -1,11 +1,11 @@
 {
-  "name": "studio.shirokurohitsuji.unity-utilities",
+  "name": "com.paochanz.unity-utilities",
   "displayName": "UnityUtilities",
   "description": "This is a package of utility files that are useful to include when starting a project.",
   "version": "1.0.10",
   "author": {
-    "name": "Shirokurohitsuji",
-    "url": "https://shirokurohitsuji.studio/"
+    "name": "paochanz",
+    "url": "https://paochanz.com/"
   },
   "unity": "2023.2",
   "unityRelease": "16f1",
@@ -13,15 +13,15 @@
     "unity"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/shirokurohitsuji/UnityUtilities#readme",
-  "changelogUrl": "https://github.com/shirokurohitsuji/UnityUtilities/blob/master/LICENSE.md",
-  "licensesUrl": "https://github.com/shirokurohitsuji/UnityUtilities/blob/master/CHANGELOG.md",
+  "homepage": "https://github.com/paochanz/UnityUtilities#readme",
+  "changelogUrl": "https://github.com/paochanz/UnityUtilities/blob/master/LICENSE.md",
+  "licensesUrl": "https://github.com/paochanz/UnityUtilities/blob/master/CHANGELOG.md",
   "optionalDependencies": {
     "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shirokurohitsuji/UnityUtilities"
+    "url": "https://github.com/paochanz/UnityUtilities"
   }
 }
