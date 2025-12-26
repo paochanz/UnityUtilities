@@ -28,6 +28,18 @@ jobs:
         with:
           repository: paochanz/UnityUtilities
           fetch-depth: 0
+      - name: free-disk-space
+        shell: bash
+        run: |
+          set -eux
+          df -h
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache
+          sudo apt-get clean
+          sudo rm -rf /var/lib/apt/lists/*
+          sudo rm -rf "$HOME/.cache"
+          df -h
       - name: prune-previous-images
         run: docker image prune --all --force
         shell: bash
