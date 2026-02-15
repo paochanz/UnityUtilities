@@ -8,6 +8,20 @@ runs:
       with:
         repository: paochanz/${{ env.PROJECT_NAME }}
         fetch-depth: 1
+    - name: add-swap-16gb
+      shell: bash
+      run: |
+        set -eux
+        free -h
+        df -h /
+        sudo fallocate -l 16G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=16384
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+        echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.conf
+        sudo sysctl -p || true
+        free -h
+        swapon --show
     - name: build
       uses: game-ci/unity-builder@v4
       with:
@@ -15,6 +29,8 @@ runs:
         targetPlatform: ${{ env.target_platform }}
         buildName: ${{ env.PROJECT_NAME }}
         customImage: ${{ env.unity_custom_image }}
+        customParameters: |
+          -job-worker-count 2
         versioning: 'None'
     - name: upload
       uses: actions/upload-artifact@v4
