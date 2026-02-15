@@ -35,18 +35,16 @@ jobs:
           df -h
           sudo rm -rf /usr/share/dotnet
           sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf /usr/lib/jvm
+          sudo rm -rf /usr/local/.ghcup
           sudo rm -rf /opt/hostedtoolcache
           sudo apt-get clean
           sudo rm -rf /var/lib/apt/lists/*
           sudo rm -rf "$HOME/.cache"
+          docker system prune -af || true
+          docker builder prune -af || true
           df -h
-      - name: prune-previous-images
-        run: docker image prune --all --force
-        shell: bash
-      - name: cache
-        uses: ./.github/actions/cache-files
-        env:
-          target_platform: ${{ matrix.targetPlatform }}
       - name: build
         uses: ./.github/actions/unity-build
         env:
@@ -58,11 +56,6 @@ jobs:
       - name: chown
         shell: bash
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-      - name: checkout-self
-        uses: actions/checkout@v4
-        with:
-          repository: paochanz/UnityUtilities
-          fetch-depth: 0
 
   prerelease:
     name: prerelease
@@ -85,8 +78,3 @@ jobs:
         uses: ./.github/actions/create-release
         env:
           deploy_platform: ${{ matrix.targetPlatform }}
-      - name: checkout-self
-        uses: actions/checkout@v4
-        with:
-          repository: paochanz/UnityUtilities
-          fetch-depth: 0
