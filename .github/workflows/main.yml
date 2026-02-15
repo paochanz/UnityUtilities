@@ -29,22 +29,14 @@ jobs:
           repository: paochanz/UnityUtilities
           fetch-depth: 0
       - name: free-disk-space
-        shell: bash
-        run: |
-          set -eux
-          df -h
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
-          sudo rm -rf /usr/lib/jvm
-          sudo rm -rf /usr/local/.ghcup
-          sudo rm -rf /opt/hostedtoolcache
-          sudo apt-get clean
-          sudo rm -rf /var/lib/apt/lists/*
-          sudo rm -rf "$HOME/.cache"
-          docker system prune -af || true
-          docker builder prune -af || true
-          df -h
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
       - name: build
         uses: ./.github/actions/unity-build
         env:

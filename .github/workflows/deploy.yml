@@ -28,13 +28,15 @@ jobs:
         with:
           repository: paochanz/UnityUtilities
           fetch-depth: 0
-      - name: prune-previous-images
-        run: docker image prune --all --force
-        shell: bash
-      - name: cache
-        uses: ./.github/actions/cache-files
-        env:
-          target_platform: ${{ matrix.targetPlatform }}
+      - name: free-disk-space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
       - name: build
         uses: ./.github/actions/unity-build
         env:
@@ -46,11 +48,6 @@ jobs:
       - name: chown
         shell: bash
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-      - name: checkout-self
-        uses: actions/checkout@v4
-        with:
-          repository: paochanz/UnityUtilities
-          fetch-depth: 0
 
   build-mac:
     name: build-for-${{ matrix.targetPlatform }}
@@ -66,13 +63,15 @@ jobs:
         with:
           repository: paochanz/UnityUtilities
           fetch-depth: 0
-      - name: prune-previous-images
-        run: docker image prune --all --force
-        shell: bash
-      - name: cache
-        uses: ./.github/actions/cache-files
-        env:
-          target_platform: ${{ matrix.targetPlatform }}
+      - name: free-disk-space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
       - name: build
         uses: ./.github/actions/unity-build
         env:
@@ -84,11 +83,6 @@ jobs:
       - name: chown
         shell: bash
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-      - name: checkout-self
-        uses: actions/checkout@v4
-        with:
-          repository: paochanz/UnityUtilities
-          fetch-depth: 0
 
   post-build-mac:
     name: notarize-for-${{ matrix.targetPlatform }}
@@ -118,11 +112,6 @@ jobs:
           APPLE_CONNECT_TEAM: ${{ vars.APPLE_CONNECT_TEAM }}
           target_platform: ${{ matrix.targetPlatform }}
           build_path: ${{ env.PROJECT_PATH }}/build/${{ matrix.targetPlatform }}/${{ env.PROJECT_NAME }}
-      - name: checkout-self
-        uses: actions/checkout@v4
-        with:
-          repository: paochanz/UnityUtilities
-          fetch-depth: 0
 
   deploy:
     name: deploy
@@ -148,11 +137,6 @@ jobs:
       - name: chown
         shell: bash
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-      - name: checkout-self
-        uses: actions/checkout@v4
-        with:
-          repository: paochanz/UnityUtilities
-          fetch-depth: 0
       - name: release-on-github
         uses: ./.github/actions/create-release
         env:
@@ -160,8 +144,3 @@ jobs:
       - name: chown
         shell: bash
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
-      - name: checkout-self
-        uses: actions/checkout@v4
-        with:
-          repository: paochanz/UnityUtilities
-          fetch-depth: 0
