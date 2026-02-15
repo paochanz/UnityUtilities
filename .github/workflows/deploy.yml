@@ -48,6 +48,11 @@ jobs:
       - name: chown
         shell: bash
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+      - name: checkout-self
+        uses: actions/checkout@v4
+        with:
+          repository: paochanz/UnityUtilities
+          fetch-depth: 1
 
   build-mac:
     name: build-for-${{ matrix.targetPlatform }}
@@ -83,6 +88,11 @@ jobs:
       - name: chown
         shell: bash
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+      - name: checkout-self
+        uses: actions/checkout@v4
+        with:
+          repository: paochanz/UnityUtilities
+          fetch-depth: 1
 
   post-build-mac:
     name: notarize-for-${{ matrix.targetPlatform }}
@@ -112,6 +122,11 @@ jobs:
           APPLE_CONNECT_TEAM: ${{ vars.APPLE_CONNECT_TEAM }}
           target_platform: ${{ matrix.targetPlatform }}
           build_path: ${{ env.PROJECT_PATH }}/build/${{ matrix.targetPlatform }}/${{ env.PROJECT_NAME }}
+      - name: checkout-self
+        uses: actions/checkout@v4
+        with:
+          repository: paochanz/UnityUtilities
+          fetch-depth: 1
 
   deploy:
     name: deploy
@@ -137,6 +152,11 @@ jobs:
       - name: chown
         shell: bash
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+      - name: checkout-self
+        uses: actions/checkout@v4
+        with:
+          repository: paochanz/UnityUtilities
+          fetch-depth: 1
       - name: release-on-github
         uses: ./.github/actions/create-release
         env:
@@ -144,3 +164,8 @@ jobs:
       - name: chown
         shell: bash
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+      - name: checkout-self
+        uses: actions/checkout@v4
+        with:
+          repository: paochanz/UnityUtilities
+          fetch-depth: 1

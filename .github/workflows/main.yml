@@ -48,6 +48,11 @@ jobs:
       - name: chown
         shell: bash
         run: sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+      - name: checkout-self
+        uses: actions/checkout@v4
+        with:
+          repository: paochanz/UnityUtilities
+          fetch-depth: 1
 
   prerelease:
     name: prerelease
@@ -70,3 +75,8 @@ jobs:
         uses: ./.github/actions/create-release
         env:
           deploy_platform: ${{ matrix.targetPlatform }}
+      - name: checkout-self
+        uses: actions/checkout@v4
+        with:
+          repository: paochanz/UnityUtilities
+          fetch-depth: 1
